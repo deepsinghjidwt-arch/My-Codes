@@ -1,0 +1,11 @@
+node {
+    stage ('github-connect') {
+        git branch: 'main', url: 'https://github.com/deepsinghjidwt-arch/poojakhet.git'
+    }
+    stage ('iac-connect') {
+        sshagent(['ansibel']) {
+            sh 'ssh -o StrictHostkeyChecking=no ubuntu@172.31.9.118'
+            sh 'scp /var/lib/jenkins/workspace/First-Project/* ubuntu@172.31.9.118:/home/ubuntu'
+        }
+    }
+ }

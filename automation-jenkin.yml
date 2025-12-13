@@ -1,0 +1,5 @@
+node {
+    stage ('github-connect') {
+        git branch: 'main', url: 'https://github.com/deepsinghjidwt-arch/poojakhet.git'
+    }
+}

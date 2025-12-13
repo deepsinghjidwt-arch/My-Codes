@@ -1,0 +1,10 @@
+# sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+   https://pkg.jenkins.io/debian/jenkins.io-2023.key
+ echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null   #1st step
+
+ # sudo apt update  #2nd step
+ 
+ 
+ # sudo apt install jenkins #3rd step
