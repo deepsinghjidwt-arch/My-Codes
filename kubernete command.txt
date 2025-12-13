@@ -1,0 +1,32 @@
+sudo mkdir test
+cd test
+vi pods.yml
+kind: Pod
+apiVersion: v1
+metadata
+kubectl get pods -o wide
+kubectl describe pod/name
+kubectl get pods
+kubectl describe pod
+kubectl logs -f testpod -c cont01
+kubectl delete pod testpod
+______________________________________
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-pod
+  annotations:
+    description: created by Vikas
+spec:
+  containers:
+  - name: count01
+    image: ubuntu:latest
+    command: ["sleep", "3600"]
+_______________________________________________
+kubectl apply -f pod.yml 
+kubectl describe pod with podname
+________________________
+kubectl exec secondpod -c count01 -- hostname -i 
+kubectl exec secondpod -c count01 -- cat /etc/os-release
+kubectl exec secondpod -it -c count01 /bin/bash
+kubectl exec -it pod1 -c cont1 -- /bin/bash

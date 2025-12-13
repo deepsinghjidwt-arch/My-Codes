@@ -1,0 +1,11 @@
+git clone             #your repo url for clone in your git
+git add             #add to singal file
+git add .           #add to all file
+git checkout -b       #creat a new branch and switch to main
+git checkout main     #go to main
+git commit -m         #for msg to any changes
+git push origin       #push your file any branch
+git push              #push your file
+git pull origin       #pull your branch another repo
+git status            #check your file status
+git diff              #check any diffrance
