@@ -1,0 +1,253 @@
+install kubernetes in your system
+
+1st step-
+sudo apt update
+ 
+# Add Docker's official GPG key:
+2nd step-
+
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+-----------------------------------------------------------------------------------------------------
+
+3rd step-
+
+Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+-------------------------------------------------------------------------------------------------------------------------------------
+4th step-
+
+sudo apt install docker.io
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+5th step-
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+kubectl version --client    #this command for check for your version
+
+--------------------------------------------------------------------------------------------------------------------------------- 
+6th step-
+
+curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+
+-----------------------------------------------------------------------------------------------------------------
+7th step-
+
+sudo chmod 777 /var/run/docker.sock
+
+----------------------------------------------------------------------------------------------------------------------
+8th step-
+
+minikube start --driver=docker
+
+-----------------------------------------------------------------------------------------------------------
+9th step
+
+sudo apt install conntrack
+
+---------------------------------------------------------------------------------------------------------------------
+10th setep
+minikube start
+#finaly fully install kubernetes
+-----------------------------------------------------------------------------------------------------------------
+
+#some command for k8s for check something
+kubectl get nodes    #check for nodes
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+sudo mkdir test
+
+cd test
+
+vi pods.yml
+
+kind: Pod
+
+apiVersion: v1
+
+metadata
+
+kubectl get pods -o wide
+
+kubectl describe pod/name
+
+kubectl get pods
+
+kubectl describe pod
+
+kubectl logs -f testpod -c cont01
+
+kubectl delete pod testpod
+-------------------------------------------------------------------------------------------------------------------
+
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  name: ubuntu-pod
+
+  annotations:
+
+    description: created by Vikas
+
+spec:
+
+  containers:
+
+  - name: count01
+
+    image: ubuntu:latest
+
+    command: ["sleep", "3600"]
+
+_______________________________________________
+
+kubectl apply -f pod.yml 
+
+kubectl describe pod with podname
+
+________________________
+
+kubectl exec secondpod -c count01 -- hostname -i 
+
+kubectl exec secondpod -c count01 -- cat /etc/os-release
+
+kubectl exec secondpod -it -c count01 /bin/bash
+
+kubectl exec -it pod1 -c cont1 -- /bin/bash
+ 
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  name: ubuntu-pod
+
+  annotations:
+
+    description: created by Vikas
+
+spec:
+
+  containers:
+
+  - name: count01
+
+    image: ubuntu:latest
+
+    command: ["sleep", "3600"]
+
+_______________________________________________
+
+kubectl apply -f pod.yml 
+
+kubectl describe pod with podname
+
+________________________
+
+kubectl exec secondpod -c count01 -- hostname -i 
+
+kubectl exec secondpod -c count01 -- cat /etc/os-release
+
+kubectl exec secondpod -it -c count01 /bin/bash
+
+kubectl exec -it pod1 -c cont1 -- /bin/bash
+ 
+ps -ef
+
+________________________________
+
+variables
+ 
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  name: envvar
+
+spec:
+
+  containers:
+
+  - name: count01
+
+    image: ubuntu:latest
+
+    command: ["sleep", "3600"]
+
+    env:
+
+      - name: myname 
+
+        value: vikas
+
+kubectl apply -f pod.yml
+
+kbectl get pods
+
+kubectl exec envvar -it -c cont01 -- /bin/bash
+
+ps ef
+
+env
+
+echo $myname
+
+___________________________________________
+
+ports
+ 
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+
+  name: pod2
+
+spec:
+
+  containers:
+
+  - name: count01
+
+    image: httpd
+
+    ports:
+
+      - containerPort:80
+ 
+kubectl apply -f pod.ymml
+
+kubectl get pods -o wide
+
+curl ip:80
+
+___________________
+ 
+kubectl scale deployment deployment --replicas=5__
+ 

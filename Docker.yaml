@@ -1,0 +1,148 @@
+sudo apt-get update
+ 
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+ 
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ 
+sudo apt-key fingerprint 0EBFCD88
+ 
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+ 
+sudo apt-get update
+ 
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo docker run hello-world
+_________________________________________________________________________
+ 
+docker container ls
+docker --help 
+docker ps
+docker image ls
+docker network ls
+docker container run ubuntu cat /etc/os-release
+docker image ls
+docker container ls -a
+docker contianer run ubuntu sleep 60
+docker contianer ls
+docker container run nginx
+dockker image ls
+docker container run ubuntu sleep 60 
+docker conatiner stop container-id
+docker container rm container-id
+docker container rm containe-d space thn id
+ 
+background run___________________
+docker container run ubuntu sleep 30
+docker container run -d ubuntu sleep 30
+docker conatiner ls
+docker container run -it ubuntu /bin/bash
+cat /etc/os-release
+hostname
+cltrl PQ - to exit from running container
+Delete _____________
+docker container stop bd02
+docker container ls -aq "contianer ids 
+docker container rm $(docker container ls -aq)
+Details of running con
+docker contaiiner run -d nginx 
+docker container inspect "container id"
+! less
+elinks "ip container"
+Logs_____________
+docker container run -d nginx
+docker container logs "container id"
+docker container top
+ps -aux
+docker contianer stats
+Port forwarding ---
+docker container instpac "con id"
+docker host ==> 3600 > 80 (Nginx web server)
+docker container stop 7a
+docker contianer run -d -p 3600:80 nginx
+docker container ls
+iconfig | less
+netstat -nltp
+brownser ip:3600
+____________________
+shell changed -incide docker 
+docker container exec -it conid /bin/bash
+apt get update
+docker container ls
+docker container rename contid newname
+docker container restart conid
+______________________
+docker container attach contianerid
+clr c
+docker container run -d -it ubuntu
+docker container attach contid
+cat /etc/os-release
+____________________________
+docker container kill conid
+docker container wait conid
+_______________________
+run and create diffrence 
+diff to show created files
+docker container run -it ubuntu /bin/bash
+new session
+ 
+docker container diff contid
+did not get ouput 
+watch docker contare diff conitd 
+cd /temp 
+touch docker 
+docker container cp file conitid:/temp
+ 
+_________________
+ 
+exprt iport
+docker container run -it centos /bin/bash
+cat /etc/redhat-relese
+dnf install vsftpd
+dnf install httpd
+cd /temp
+mkdir db
+cd db 
+touch file name 
+new session
+docker container ls
+docker container export contid > my_updated_centos.tar
+ls -ltr
+docker image ls
+docker image import mytar mynewfile
+_______________________
+puch image to docker hub
+login to docker hub
+docker login and usr id pass
+docker image ls
+docker push reponame/image name
+____________________________________________
+create image from running container
+docker container run -it centos /bin/bash
+inside container thn
+cd /tmp
+touch file 2 or three
+dnf install tree
+dnf install httpd
+open new session with host
+docker container ls
+docker container commit --author "name" -m "reason" conid centos_name 
+docker container run -it name /bin/bash
+________________________________________________
+/home/ubuntu/aws
+Docker file 
+vi Dockerilfe "FROM centos:7 and save
+docker build -t mycentos:1 -f /home/ubuntu/docker/Dockerfile .
+docker image ls
+vi dokcer file 
+RUN yum install -y vsftp
+RUN yum install -y httpd
+RUN touch /tmp/abc.txt
+docker build -t mycentos:3 -f path and dot
