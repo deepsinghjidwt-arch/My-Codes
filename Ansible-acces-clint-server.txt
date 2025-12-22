@@ -1,0 +1,162 @@
+#acces clint server via a jenkin through ansibel without password authentication
+
+Step1
+crate a 2,3 ec2 instances
+------------------------------------------------------------------------------
+
+3rd step
+connect all terminal
+-------------------------------------------------------------------------------
+
+4th step
+install ansibel one ec2 and one is jenkins in ec2 instance
+-------------------------------------------------------------------------------
+
+#we are insatall jenkin in ec2 instance
+ 1st cmd- sudo apt update 
+
+ 2nd cmd- 
+          sudo apt update
+          sudo apt install fontconfig openjdk-21-jre
+          java -version
+
+ 3rd cmd- 
+          sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+            https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+          echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+            https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+            /etc/apt/sources.list.d/jenkins.list > /dev/null
+          sudo apt update
+          sudo apt install jenkins
+
+ 4th cmd-
+          sudo apt update
+
+5th step
+install ansibel in ec2 instances
+
+#we are installing ansibel in ec2 instance
+ 1st cmd- 
+          sudo apt update 
+
+ 2nd cmd- 
+          sudo apt install python2 
+
+ 3rd cmd-
+          sudo apt install python-pip 
+
+ 4th cmd-
+          sudo apt install python3-boto
+
+ 5th cmd-
+          sudo apt install python3-boto3
+ 6th cmd-
+          sudo apt install ansible
+ 7th cmd-
+          ansible localhost -m ping    #for check install are not
+
+          ansible-galaxy collection install amazon.aws     #not a mendtry 
+
+6th step
+
+#create a pipeline in jenkins server
+ 1st step 
+         crete a project
+          and go to configer
+           and make a script
+            go to pipeline syntax
+            and go to simple bar and sleact git 
+            then go to github repo 
+            and copy git repo link
+            and past in pipeline box
+
+  node {
+    stage ('Gitconnect') {
+        git branch: 'main', url: 'https://github.com/devops191182/9.30am-project-22nov.git'
+    }
+    stage ('ansible connect') {
+       sshagent(['ansible']) {
+           sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.32.253'
+           sh 'scp /var/lib/jenkins/workspace/Kubetnetes-project/* ubuntu@172.31.32.253:/home/ubuntu'
+      } 
+    }
+  }   
+
+jenkin path is cd /var/lib/jenkin      #its a jenkins path
+ 
+7th step
+#create a credential for ansibel connect to jenkin
+  go to credential 
+  sleact globel
+  and create credential
+  sleact ssh host
+  slect ubuntu user
+  slect privet key
+  uplode in box
+  and create it
+
+8th step
+ #now create pipeline for ansible 
+  now again go to pipeline syntax
+  sleact sshagent
+  and when you make ansible credential
+  and create your ansibel token
+  then past your pipeline code 
+  
+  #now create a webhook in github repository
+   go to git hub 
+   go to repo setting slecat webhook
+   and open it
+   copy your jenkin ip address
+   and paste in box and end the last mention is /github-webhook/
+   then now create a token
+   open jenkin
+   and go to security
+   and create a token
+   and past in webhook
+   and now genrate a webhook
+  and end the last opstion slecat github hook triger 
+
+All set  your pipeline is redy
+
+
+#if you think if i acces a clint server so i dont won't any password for acces my clint server
+ so we used password authentication opstion
+
+# we have some command
+  go to ansibel server and rum some command
+   ssh-keygen     #its a command
+   then he genrate a token
+
+# and now go to clint server
+  cd /etc/ssh/
+  and there are one file is sshd_config 
+  open it
+  and enabel password authentication
+  and complete the process 
+  now restart your system
+  sudo service ssh restart     #its a command
+
+ now check file
+ cd .ssh/    #command
+ there are showing one file
+ and open the file and check it
+
+# now go to your ansible server
+ and check there a token
+ cd .ssh/   #command
+ and open file id_rsa_pub
+ and copy all code
+
+# go to cline server
+ there are open file 
+ and open autherize-key
+ and paste the copy password there
+
+#now acces clinte server 
+ ssh ubuntu@ and clinte ip address
+ 
+
+
+
+

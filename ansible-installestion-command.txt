@@ -1,0 +1,28 @@
+1st command
+sudo apt update
+-------------------------------------------------------------------------------
+
+2nd command
+sudo apt install python2 
+-------------------------------------------------------------------------------
+
+3rd command
+sudo apt install python-pip 
+------------------------------------------------------------------------------
+
+4th command
+sudo apt install python3-boto
+------------------------------------------------------------------------------
+
+5th command
+sudo apt install python3-boto3
+------------------------------------------------------------------------------
+
+6th command
+sudo apt install ansible
+------------------------------------------------------------------------------
+
+7th command
+ansible localhost -m ping    #for check install are not
+
+ansible-galaxy collection install amazon.aws     #not a mendtry 

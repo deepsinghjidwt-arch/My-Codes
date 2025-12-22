@@ -1,0 +1,47 @@
+# create S3 bucket via a command line interface CLI
+ 1st step 
+ create Iam user with full addmnistertor Acces
+ ---------------------------------------------------------------
+
+ 2nd step
+ create a ec2 instance and connect with your cansol
+ ---------------------------------------------------------------
+
+ 3rd step
+ sudo apt update
+ ----------------------------------------------------------------
+
+ 4th step
+ aws configure     #for give a user acces full fill all
+ -----------------------------------------------------------------
+
+ 5th step
+ aws ec2 describe-instance       # check all about your ec2 instance
+ -----------------------------------------------------------------
+
+ 6th step
+ aws s3 mb s3://bucket-name      #create bucket command   (mb=make bucket)
+ -----------------------------------------------------------------------------
+
+ 7th step
+ touch file name               #crate a any file 
+ ----------------------------------------------------------------------------
+
+ 8th step
+ aws s3 cp (file name) s3://(bucket name)         #cp= copy file
+ --------------------------------------------------------------------------------
+
+ 9th step
+ #If your are uplode a big data in s3 bucket so go your window terminal and configer your aws resource
+ aws configure
+ ----------------------------------------------------------------------------------------------------------
+
+ 10th step
+ aws s3 cp (file name) s3://(bucket name) --recursive   #we use recursive when we all file uplode in bucket
+
+ sudo rm    #remove your file
+ 
+ 
+ 
+
+
