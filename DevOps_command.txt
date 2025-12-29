@@ -1,0 +1,211 @@
+    My Web Ride: Daily Batch session running notes/Steps/URL etc
+
+Linux:
+
+Online linux terminal: https://www.terminaltemple.com/
+How to Download linux on windows system:
+
+
+Microsoft store ----> Ubuntu 24 22
+turn windows features on or off 
+windows subsystem for Linux
+restart 
+
+Linux commands: 
+clear -------> clear the screen 
+cntl+c --------> to cancle the command 
+ls ------------> to list files and folders
+ls -ltr ------->
+mkdir  ------> to create a new dir
+cd -----------> change in dir
+touch ---------> to create a empty file
+pwd ---------> present working dir
+rm -----------> delete empty file
+rmdir --------> to delete a folder
+cd .. -------> to back one step
+rm -rf -------> forceful deletion
+cat ----------> open a file
+cat -n filename --> shows output with line numberes
+vi filename -----> text editor
+esc+i -------------> insert mode
+esc :wq! ----------> save and exit
+esc + :qa! -------> to quit without saving
+ 
+> ------>redirect overwrite
+>> ------> append
+wc -------> word count
+touch file{1..10} ---------> multiple files
+mkdir -p /test/test1/test2/test3
+
+sudo ------> 
+sudo su -       switch root user
+in vi editor
+to set the line numbers 
+:set nu
+:set nonu  ---to remove line numbers
+
+chmod 400 filename --------> to change the permissions of a file 
+read -------> 4
+write -----> 2
+execute ---> 1
+
+users groups others
+
+head -------> to print lines from top
+| -------------> pipe
+hostname --------> server name
+hostname -I -----> ip details
+uname -a  ---------> os name and details
+
+
+networking commands
+ping command to check reachability
+top ------------> cpu information
+ps -eaf ----------> to list the processes on machine
+kill -9 PID 
+
+free -g -----------> to print memory information
+
+lsblk -------------> to know the disk information
+
+sed --------is used to replace, delete ,print the required lines
+
+sed 's/oldname/newname/g' filename
+
+sed '1d' filename ----------> to delete operation
+sed -n '1p' filename -------> to print the lines
+awk '{print $2}' filename -----------> to print the columns
+
+
+how to connect ec2 with mobaxterm
+
+https://mobaxterm.mobatek.net/download.html
+open mobaxterm in download
+ssh -i <keyname> ubuntu@public-ip
+
+
+Jenkins Step:
+
+Jenkins-installation on ubuntu:
+----------------------------------------------------------------------------------------------------------------
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+sudo apt install default-jdk
+
+
+=========== Jenkins installation on amazon-linux2023==================
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo yum install java-21-amazon-corretto-devel
+sudo yum install jenkins
+sudo systemctl daemon-reload
+
+
+make sure :
+on your ec2 security: ----> sg-id-->edit inbound rules-->add a rule --> customeTCP--8080 --0.0.0.0/0-->save the rule
+
+
+sudo systemctl status jenkins
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo systemctl stop jenkins
+
+===============================
+
+docker installation on ubuntu:
+--------------------------------------------------------------------------------------------------------------------------------
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+systemctl status docker
+
+switch user to ubuntu
+
+now create the docker user and group :
+sudo usermod -aG docker $USER && newgrp docker
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kubernetes
+----------------------------------------------------------------------------------------------------
+
+minikube installation on ubuntu:
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+sudo dpkg -i minikube_latest_amd64.deb
+
+minikube start
+
+minikube status
+
+install kubectl on ubuntu:
+sudo snap install kubectl --classic
+
+To check the nodes :
+
+kubectl get nodes
+
+kubectl get pods
+
+create yaml file to deploy nginx pod:
+vi pod.yaml
+ 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+kubectl apply -f pod.yaml
+
+
+
+

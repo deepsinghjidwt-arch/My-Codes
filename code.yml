@@ -1,0 +1,18 @@
+node {
+    stage ('Gitconnect') {
+        git branch: 'main', url: 'https://github.com/deepsinghjidwt-arch/DevOps-Project.git'
+    }
+    stage ('ansible connect') {
+       sshagent(['Ansibel']) {
+           sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.32.123'
+           sh 'scp /var/lib/jenkins/workspace/Main-Project/* ubuntu@172.31.32.123:/home/ubuntu'
+      } 
+    }
+      stage ('Kubernetes deployment') {
+    sshagent(['Ansibel']) {
+			 sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.32.123 cd /home/ubuntu'
+			 sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.32.123 ansible-playbook pod4.yml'
+             }
+    }
+ 
+}

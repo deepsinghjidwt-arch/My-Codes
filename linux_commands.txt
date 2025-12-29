@@ -1,0 +1,69 @@
+Microsoft store ----> ubuntu 24 22
+turn windows features on or off 
+windows subsystem for Linux
+restart 
+
+
+clear -------> clear the screen 
+cntl+c --------> to cancle the command 
+ls ------------> to list files and folders
+ls -ltr ------->
+mkdir  ------> to create a new dir
+cd -----------> change in dir
+touch ---------> to create a empty file
+pwd ---------> present working dir
+rm -----------> delete empty file
+rmdir --------> to delete a folder
+cd .. -------> to back one step
+rm -rf -------> forceful deletion
+cat ----------> open a file
+cat -n filename --> shows output with line numberes
+vi filename -----> text editor
+esc+i -------------> insert mode
+esc :wq! ----------> save and exit
+esc + :qa! -------> to quit without saving
+ 
+> ------>redirect overwrite
+>> ------> append
+wc -------> word count
+touch file{1..10} ---------> multiple files
+mkdir -p /test/test1/test2/test3
+
+sudo ------> 
+sudo su -       switch root user
+in vi editor
+to set the line numbers 
+:set nu
+:set nonu  ---to remove line numbers
+
+chmod 400 filename --------> to change the permissions of a file 
+read -------> 4
+write -----> 2
+execute ---> 1
+
+users groups others
+
+head -------> to print lines from top
+| -------------> pipe
+hostname --------> server name
+hostname -I -----> ip details
+uname -a  ---------> os name and details
+
+
+networking commands
+ping command to check reachability
+top ------------> cpu information
+ps -eaf ----------> to list the processes on machine
+kill -9 PID 
+
+free -g -----------> to print memory information
+
+lsblk -------------> to know the disk information
+
+sed --------is used to replace, delete ,print the required lines
+
+sed 's/oldname/newname/g' filename
+
+sed '1d' filename ----------> to delete operation
+sed -n '1p' filename -------> to print the lines
+awk '{print $2}' filename -----------> to print the columns 
